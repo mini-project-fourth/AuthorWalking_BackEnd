@@ -4,10 +4,9 @@ import com.mini4.aiLibrary.domain.Book;
 import com.mini4.aiLibrary.dto.BookDto;
 import com.mini4.aiLibrary.service.BookService;
 import com.mini4.aiLibrary.service.BookServiceImpl;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 public class BookController {
@@ -18,9 +17,18 @@ public class BookController {
         this.bookService = bookService;
     }
 
+    @GetMapping("/books")
+    public List<Book> getBooks() {return bookService.findBooks();}
+
+    @GetMapping("/books/{id}")
+    public Book getBook(@PathVariable Long id){
+        return bookService.findBook(id);
+    }
+
     @PostMapping("/books")
     public Book createBook(@RequestBody BookDto.BookPost bookDto) {
         return bookService.insertBook(bookDto);
     }
+
 
 }
