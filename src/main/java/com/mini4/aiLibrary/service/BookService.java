@@ -6,5 +6,5 @@ import com.mini4.aiLibrary.dto.BookDto;
 public interface BookService {
 
     public Book insertBook(BookDto.BookPost bookDto);
-
+    public Book updateBook(Long id, BookDto.BookPut bookDto);
 }

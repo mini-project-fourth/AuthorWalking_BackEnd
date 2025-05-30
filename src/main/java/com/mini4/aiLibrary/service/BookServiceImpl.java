@@ -20,4 +20,12 @@ public class BookServiceImpl implements BookService{
         return bookRepository.save(book);
     }
 
+    public Book updateBook(Long id, BookDto.BookPut bookDto) {
+        Book book = bookRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("수정할 책이 존재하지 않습니다."));
+        book.setTitle(bookDto.getTitle());
+        book.setContents(bookDto.getContents());
+        book.setCover(bookDto.getCover());
+        return bookRepository.save(book);
+    }
+
 }
