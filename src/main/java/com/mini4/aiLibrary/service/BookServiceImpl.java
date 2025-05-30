@@ -20,4 +20,12 @@ public class BookServiceImpl implements BookService{
         return bookRepository.save(book);
     }
 
+    @Override
+    public void deleteBook(Long id){
+        if (!bookRepository.existsById(id)){
+            throw new IllegalArgumentException("해당 책이 존재하지 않습니다. id=" + id);
+        }
+        bookRepository.deleteById(id);
+    }
+
 }
