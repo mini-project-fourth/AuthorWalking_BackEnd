@@ -6,6 +6,8 @@ import com.mini4.aiLibrary.service.BookService;
 import com.mini4.aiLibrary.service.BookServiceImpl;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 public class BookController {
 
@@ -19,8 +21,21 @@ public class BookController {
     public Book createBook(@RequestBody BookDto.BookPost bookDto) {
         return bookService.insertBook(bookDto);
     }
+
+    @PutMapping("/books/{id}")
+    public Book updateBook(@PathVariable Long id, @RequestBody BookDto.BookPut bookDto) {
+        return bookService.updateBook(id, bookDto);
+    }
+
+    @GetMapping("/books")
+    public List<Book> getBooks() {return bookService.findBooks();}
+
+    @GetMapping("/books/{id}")
+    public Book getBook(@PathVariable Long id){
+        return bookService.findBook(id);
+    }
+  
     @DeleteMapping("/books/{id}")
     public void deleteBook(@PathVariable Long id){
        bookService.deleteBook(id);
-    }
 }
