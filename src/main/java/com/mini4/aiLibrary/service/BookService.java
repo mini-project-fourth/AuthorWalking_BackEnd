@@ -11,5 +11,5 @@ public interface BookService {
     Book updateBook(Long id, BookDto.BookPut bookDto);
     List<Book> findBooks();
     Book findBook(Long id);
-
+    void deleteBook(Long id);
 }

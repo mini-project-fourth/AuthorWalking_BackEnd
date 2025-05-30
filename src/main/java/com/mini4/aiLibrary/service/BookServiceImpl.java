@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-
 public class BookServiceImpl implements BookService{
 
     private final BookRepository bookRepository;
@@ -43,4 +42,13 @@ public class BookServiceImpl implements BookService{
                 () -> new EntityNotFoundException("책을 찾을 수 없습니다.")
         );
     }
+
+    @Override
+    public void deleteBook(Long id){
+        if (!bookRepository.existsById(id)){
+            throw new IllegalArgumentException("해당 책이 존재하지 않습니다. id=" + id);
+        }
+        bookRepository.deleteById(id);
+    }
+
 }
