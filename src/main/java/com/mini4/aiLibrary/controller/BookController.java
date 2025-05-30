@@ -22,5 +22,11 @@ public class BookController {
     public Book createBook(@RequestBody BookDto.BookPost bookDto) {
         return bookService.insertBook(bookDto);
     }
+    @GetMapping("/books")
+    public List<Book> getBooks() {return bookService.findBooks();}
 
+    @GetMapping("books/{id}")
+    public Book getBook(@PathVariable Long id){
+        return bookService.findBook(id);
+    }
 }
