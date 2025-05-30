@@ -1,0 +1,23 @@
+package com.mini4.aiLibrary.service;
+
+import com.mini4.aiLibrary.domain.Book;
+import com.mini4.aiLibrary.dto.BookDto;
+import com.mini4.aiLibrary.repository.BookRepository;
+import org.springframework.stereotype.Service;
+
+@Service
+public class BookServiceImpl implements BookService{
+
+    private final BookRepository bookRepository;
+
+    public BookServiceImpl(BookRepository bookRepository) {
+        this.bookRepository = bookRepository;
+    }
+
+    @Override
+    public Book insertBook(BookDto.BookPost bookDto) {
+        Book book = bookDto.toEntity();
+        return bookRepository.save(book);
+    }
+
+}
