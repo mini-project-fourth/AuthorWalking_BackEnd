@@ -1,7 +1,10 @@
 package com.mini4.aiLibrary.dto;
 
 import com.mini4.aiLibrary.domain.Book;
+import com.mini4.aiLibrary.domain.HashTag;
 import lombok.*;
+
+import java.util.List;
 
 public class BookDto {
 
@@ -15,16 +18,7 @@ public class BookDto {
         private String author;
         private String contents;
         private String cover;
-
-        @Builder
-        public Book toEntity() {
-            return Book.builder()
-                    .title(title)
-                    .author(author)
-                    .contents(contents)
-                    .cover(cover)
-                    .build();
-        }
+        private List<String> hashTags;
     }
 
     @Getter
@@ -37,5 +31,4 @@ public class BookDto {
         private String contents;
         private String cover;
     }
-
 }
