@@ -31,4 +31,5 @@ public class BookDto {
         private String contents;
         private String cover;
     }
+  
 }
