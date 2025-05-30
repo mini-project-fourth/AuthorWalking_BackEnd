@@ -17,6 +17,16 @@ public class BookController {
         this.bookService = bookService;
     }
 
+    @PostMapping("/books")
+    public Book createBook(@RequestBody BookDto.BookPost bookDto) {
+        return bookService.insertBook(bookDto);
+    }
+
+    @PutMapping("/books/{id}")
+    public Book updateBook(@PathVariable Long id, @RequestBody BookDto.BookPut bookDto) {
+        return bookService.updateBook(id, bookDto);
+    }
+
     @GetMapping("/books")
     public List<Book> getBooks() {return bookService.findBooks();}
 
@@ -24,17 +34,4 @@ public class BookController {
     public Book getBook(@PathVariable Long id){
         return bookService.findBook(id);
     }
-
-    @PostMapping("/books")
-    public Book createBook(@RequestBody BookDto.BookPost bookDto) {
-        return bookService.insertBook(bookDto);
-    }
-    @GetMapping("/books")
-    public List<Book> getBooks() {return bookService.findBooks();}
-
-    @GetMapping("books/{id}")
-    public Book getBook(@PathVariable Long id){
-        return bookService.findBook(id);
-    }
-  
 }

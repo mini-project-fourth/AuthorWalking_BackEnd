@@ -23,28 +23,24 @@ public class BookServiceImpl implements BookService{
         Book book = bookDto.toEntity();
         return bookRepository.save(book);
     }
+
+    public Book updateBook(Long id, BookDto.BookPut bookDto) {
+        Book book = bookRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("수정할 책이 존재하지 않습니다."));
+        book.setTitle(bookDto.getTitle());
+        book.setContents(bookDto.getContents());
+        book.setCover(bookDto.getCover());
+        return bookRepository.save(book);
+    }
+
     @Override
     public List<Book> findBooks() {
         return bookRepository.findAll();
     }
+
     @Override
     public Book findBook(Long id){
         return bookRepository.findById(id).orElseThrow(
                 () -> new EntityNotFoundException("책을 찾을 수 없습니다.")
         );
     }
-
-    @Override
-    public List<Book> findBooks() {
-        return bookRepository.findAll();
-
-    }
-
-    @Override
-    public Book findBook(Long id) {
-        return bookRepository.findById(id).orElseThrow(
-                () -> new EntityNotFoundException("책을 찾을 수 없습니다.")
-        );
-    }
-
 }
