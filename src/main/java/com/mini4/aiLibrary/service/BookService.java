@@ -7,9 +7,12 @@ import java.util.List;
 
 public interface BookService {
 
-    Book insertBook(BookDto.BookPost bookDto);
+    public Book insertBook(BookDto.BookPost bookDto);
     List<Book> findBooks();
     Book findBook(Long id);
 
+    Book insertBook(BookDto.BookPost bookDto);
+    List<Book> findBooks();
+    Book findBook(Long id);
 
 }

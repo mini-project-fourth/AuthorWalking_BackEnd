@@ -23,6 +23,16 @@ public class BookServiceImpl implements BookService{
         Book book = bookDto.toEntity();
         return bookRepository.save(book);
     }
+    @Override
+    public List<Book> findBooks() {
+        return bookRepository.findAll();
+    }
+    @Override
+    public Book findBook(Long id){
+        return bookRepository.findById(id).orElseThrow(
+                () -> new EntityNotFoundException("책을 찾을 수 없습니다.")
+        );
+    }
 
     @Override
     public List<Book> findBooks() {
