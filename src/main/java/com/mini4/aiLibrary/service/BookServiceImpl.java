@@ -1,15 +1,16 @@
 package com.mini4.aiLibrary.service;
 
 import com.mini4.aiLibrary.domain.Book;
+import com.mini4.aiLibrary.domain.HashTag;
 import com.mini4.aiLibrary.dto.BookDto;
 import com.mini4.aiLibrary.repository.BookRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
-
 public class BookServiceImpl implements BookService{
 
     private final BookRepository bookRepository;
@@ -20,7 +21,21 @@ public class BookServiceImpl implements BookService{
 
     @Override
     public Book insertBook(BookDto.BookPost bookDto) {
-        Book book = bookDto.toEntity();
+        Book book = Book.builder()
+                .title(bookDto.getTitle())
+                .author(bookDto.getAuthor())
+                .contents(bookDto.getContents())
+                .cover(bookDto.getCover())
+                .build();
+
+        List<HashTag> tags = bookDto.getHashTags().stream()
+                .map(tag -> HashTag.builder()
+                        .tagName(tag)
+                        .book(book)
+                        .build())
+                .collect(Collectors.toList());
+
+        book.setHashTags(tags);
         return bookRepository.save(book);
     }
 
@@ -44,7 +59,7 @@ public class BookServiceImpl implements BookService{
                 () -> new EntityNotFoundException("책을 찾을 수 없습니다.")
         );
     }
-  
+
     @Override
     public void deleteBook(Long id){
         if (!bookRepository.existsById(id)){
