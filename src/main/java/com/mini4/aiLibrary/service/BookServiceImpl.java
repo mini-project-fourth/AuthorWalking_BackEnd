@@ -24,6 +24,7 @@ public class BookServiceImpl implements BookService{
         return bookRepository.save(book);
     }
 
+    @Override
     public Book updateBook(Long id, BookDto.BookPut bookDto) {
         Book book = bookRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("수정할 책이 존재하지 않습니다."));
         book.setTitle(bookDto.getTitle());
@@ -43,4 +44,13 @@ public class BookServiceImpl implements BookService{
                 () -> new EntityNotFoundException("책을 찾을 수 없습니다.")
         );
     }
+  
+    @Override
+    public void deleteBook(Long id){
+        if (!bookRepository.existsById(id)){
+            throw new IllegalArgumentException("해당 책이 존재하지 않습니다. id=" + id);
+        }
+        bookRepository.deleteById(id);
+    }
+
 }

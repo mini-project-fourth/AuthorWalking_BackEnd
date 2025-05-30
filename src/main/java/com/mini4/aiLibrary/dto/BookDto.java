@@ -38,5 +38,4 @@ public class BookDto {
         private String cover;
     }
 
-
 }
