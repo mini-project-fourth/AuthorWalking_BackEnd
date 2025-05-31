@@ -2,7 +2,7 @@ package com.mini4.aiLibrary.service;
 
 import com.mini4.aiLibrary.domain.Book;
 import com.mini4.aiLibrary.domain.HashTag;
-import com.mini4.aiLibrary.dto.BookDto;
+import com.mini4.aiLibrary.dto.BookRequestDto;
 import com.mini4.aiLibrary.repository.BookRepository;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.stereotype.Service;
@@ -20,7 +20,7 @@ public class BookServiceImpl implements BookService{
     }
 
     @Override
-    public Book insertBook(BookDto.BookPost bookDto) {
+    public Book insertBook(BookRequestDto bookDto) {
         Book book = Book.builder()
                 .title(bookDto.getTitle())
                 .author(bookDto.getAuthor())
@@ -40,11 +40,21 @@ public class BookServiceImpl implements BookService{
     }
 
     @Override
-    public Book updateBook(Long id, BookDto.BookPut bookDto) {
-        Book book = bookRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("수정할 책이 존재하지 않습니다."));
+    public Book updateBook(Long id, BookRequestDto bookDto) {
+        Book book = findBook(id);
         book.setTitle(bookDto.getTitle());
+        book.setAuthor(bookDto.getAuthor());
         book.setContents(bookDto.getContents());
         book.setCover(bookDto.getCover());
+
+        List<HashTag> tags = bookDto.getHashTags().stream()
+                .map(tag -> HashTag.builder()
+                        .tagName(tag)
+                        .book(book)
+                        .build())
+                .collect(Collectors.toList());
+
+        book.setHashTags(tags);
         return bookRepository.save(book);
     }
 
