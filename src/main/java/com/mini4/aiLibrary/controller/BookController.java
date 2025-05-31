@@ -1,9 +1,8 @@
 package com.mini4.aiLibrary.controller;
 
 import com.mini4.aiLibrary.domain.Book;
-import com.mini4.aiLibrary.dto.BookDto;
+import com.mini4.aiLibrary.dto.BookRequestDto;
 import com.mini4.aiLibrary.service.BookService;
-import com.mini4.aiLibrary.service.BookServiceImpl;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,12 +18,12 @@ public class BookController {
     }
 
     @PostMapping("/books")
-    public Book createBook(@RequestBody BookDto.BookPost bookDto) {
+    public Book createBook(@RequestBody BookRequestDto bookDto) {
         return bookService.insertBook(bookDto);
     }
 
     @PutMapping("/books/{id}")
-    public Book updateBook(@PathVariable Long id, @RequestBody BookDto.BookPut bookDto) {
+    public Book updateBook(@PathVariable Long id, @RequestBody BookRequestDto bookDto) {
         return bookService.updateBook(id, bookDto);
     }
 
