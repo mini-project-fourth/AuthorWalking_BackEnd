@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface BookService {
 
-    Book insertBook(BookRequestDto bookDto);
+    Book insertBook(BookRequestDto bookDto, String email);
     Book updateBook(Long id, BookRequestDto bookDto);
     List<Book> findBooks();
     Book findBook(Long id);

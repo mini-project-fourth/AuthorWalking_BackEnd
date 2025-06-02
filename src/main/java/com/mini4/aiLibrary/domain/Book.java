@@ -1,5 +1,6 @@
 package com.mini4.aiLibrary.domain;
 
+
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
@@ -30,6 +31,7 @@ public class Book {
     @Column(nullable = false, columnDefinition = "TEXT")
     private String contents;
 
+
     @Column(nullable = false, columnDefinition = "TEXT")
     private String cover;
 
@@ -42,5 +44,9 @@ public class Book {
 
     @UpdateTimestamp
     private LocalDateTime updateAt;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
 }
