@@ -1,7 +1,7 @@
 spring:
   datasource:
     driver-class-name: org.h2.Driver
-    url: jdbc:h2:~/aiLibrary
+    url: jdbc:h2:~/Library
     username: sa
     password: 1234
   h2:
@@ -19,5 +19,7 @@ springdoc:
     path: /swagger-ui
 jwt:
   secret-key: ${JWT_SECRET_KEY}
-
-
+book:
+  client:
+    id: ${book.client.id}
+    secret: ${book.client.secret}
