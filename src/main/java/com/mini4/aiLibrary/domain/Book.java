@@ -28,10 +28,11 @@ public class Book {
     @Column(nullable = false)
     private String author;
 
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String contents;
 
-    @Column(length = 1000)
+
+    @Column(nullable = false, columnDefinition = "TEXT")
     private String cover;
 
     @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
