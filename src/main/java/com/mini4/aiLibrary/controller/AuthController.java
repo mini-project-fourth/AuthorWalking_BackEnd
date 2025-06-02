@@ -15,9 +15,8 @@ package com.mini4.aiLibrary.controller;
     @RequestMapping("/auth")
     public class AuthController {
 
-    private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
-         private final JwtUtil jwtUtil;
-
+        private static final Logger logger = LoggerFactory.getLogger(AuthController.class);
+        private final JwtUtil jwtUtil;
 
         private final AuthService authService;
         private final UserService userService;
@@ -39,6 +38,7 @@ package com.mini4.aiLibrary.controller;
             String token = authService.loginUser(loginDto);
             return ResponseEntity.ok(token);
         }
+
         @GetMapping("/userinfo")
         public ResponseEntity<User> getUserInfo(@RequestHeader(value = "Authorization", required = false) String token) {
             if (token == null) {
